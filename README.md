@@ -103,8 +103,8 @@ jmeter -q user.properties -n -t stress_test.jmx -l ./result/spring/result.csv -e
 
 # Analyse Test Results and Conclusion
 After running the test on my laptop, I found that Spring-boot actually performed much better than Vert.x in term of speed and stability.
-![Vert.x summary](results/images/vertx_summary.jpg)
-![Spring-boot summary](results/images/springboot_summary.jpg)
+![Vert.x summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx_summary.jpg)
+![Spring-boot summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot_summary.jpg)
 
 
 I also created a [Symfony](https://symfony.com/) 4 microservices project to run with Apache 2 httpd server
