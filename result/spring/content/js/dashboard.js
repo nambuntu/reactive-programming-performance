@@ -133,7 +133,7 @@ $(document).ready(function() {
         widgets: ['zebra']
     });
 
-    var data = {"OkPercent": 99.93692501769176, "KoPercent": 0.06307498230823667};
+    var data = {"OkPercent": 100.0, "KoPercent": 0.0};
     var dataset = [
         {
             "label" : "KO",
@@ -173,7 +173,7 @@ $(document).ready(function() {
     });
 
     // Creates APDEX table
-    createTable($("#apdexTable"), {"supportsControllersDiscrimination": true, "overall": {"data": [0.7542268580483377, 100, 500, "Total"], "isController": false}, "titles": ["Apdex", "T (Toleration threshold)", "F (Frustration threshold)", "Label"], "items": [{"data": [0.7542384615384615, 100, 500, "HP"], "isController": false}, {"data": [0.7542384615384615, 100, 500, "Transaction Controller"], "isController": true}, {"data": [0.0, 100, 500, "POST - book"], "isController": false}, {"data": [0.0, 100, 500, "POST - cleanup"], "isController": false}]}, function(index, item){
+    createTable($("#apdexTable"), {"supportsControllersDiscrimination": true, "overall": {"data": [0.5938067698871685, 500, 1500, "Total"], "isController": false}, "titles": ["Apdex", "T (Toleration threshold)", "F (Frustration threshold)", "Label"], "items": [{"data": [0.5938, 500, 1500, "HP"], "isController": false}, {"data": [0.5938, 500, 1500, "Transaction Controller"], "isController": true}, {"data": [1.0, 500, 1500, "POST - book"], "isController": false}, {"data": [1.0, 500, 1500, "POST - cleanup"], "isController": false}]}, function(index, item){
         switch(index){
             case 0:
                 item = item.toFixed(3);
@@ -187,7 +187,7 @@ $(document).ready(function() {
     }, [[0, 0]], 3);
 
     // Create statistics table
-    createTable($("#statisticsTable"), {"supportsControllersDiscrimination": true, "overall": {"data": ["Total", 65002, 41, 0.06307498230823667, 310.92961755022645, 1, 6892, 64.0, 147.0, 513.9900000000016, 500.82826741865637, 118.63883399209487, 76.29882383618798], "isController": false}, "titles": ["Label", "#Samples", "KO", "Error %", "Average", "Min", "Max", "90th pct", "95th pct", "99th pct", "Transactions\/s", "Received", "Sent"], "items": [{"data": ["HP", 65000, 41, 0.06307692307692307, 310.8676000000006, 1, 6892, 64.0, 147.0, 513.9900000000016, 500.81285779226283, 118.63669711030983, 76.29570880429004], "isController": false}, {"data": ["Transaction Controller", 65000, 41, 0.06307692307692307, 310.8677999999983, 1, 6892, 64.0, 147.0, 513.9900000000016, 500.0038461834322, 118.44505174078263, 76.17246094200725], "isController": true}, {"data": ["POST - book", 1, 0, 0.0, 745.0, 745, 745, 745.0, 745.0, 745.0, 1.3422818791946307, 0.2674077181208054, 0.30935402684563756], "isController": false}, {"data": ["POST - cleanup", 1, 0, 0.0, 3908.0, 3908, 3908, 3908.0, 3908.0, 3908.0, 0.25588536335721596, 0.019991044012282497, 0.04448007292732856], "isController": false}]}, function(index, item){
+    createTable($("#statisticsTable"), {"supportsControllersDiscrimination": true, "overall": {"data": ["Total", 60002, 0, 0.0, 783.9259691343555, 4, 1752, 1046.0, 1075.0, 1158.0, 1429.7764857265404, 341.71347415169424, 217.81988507065242], "isController": false}, "titles": ["Label", "#Samples", "KO", "Error %", "Average", "Min", "Max", "90th pct", "95th pct", "99th pct", "Transactions\/s", "Received", "Sent"], "items": [{"data": ["HP", 60000, 0, 0.0, 783.948550000005, 4, 1752, 1046.0, 1075.0, 1158.0, 1429.7288280989374, 341.70686537911644, 217.81025115569747], "isController": false}, {"data": ["Transaction Controller", 60000, 0, 0.0, 783.9486833333301, 4, 1752, 1046.0, 1075.0, 1158.0, 1418.2720718591183, 338.9686872119135, 216.06488594728756], "isController": true}, {"data": ["POST - book", 1, 0, 0.0, 117.0, 117, 117, 117.0, 117.0, 117.0, 8.547008547008549, 1.7027243589743588, 1.969818376068376], "isController": false}, {"data": ["POST - cleanup", 1, 0, 0.0, 96.0, 96, 96, 96.0, 96.0, 96.0, 10.416666666666666, 0.8138020833333334, 1.8107096354166665], "isController": false}]}, function(index, item){
         switch(index){
             // Errors pct
             case 3:
@@ -215,7 +215,7 @@ $(document).ready(function() {
     }, [[0, 0]], 0, summaryTableHeader);
 
     // Create error table
-    createTable($("#errorsTable"), {"supportsControllersDiscrimination": false, "titles": ["Type of error", "Number of errors", "% in errors", "% in all samples"], "items": [{"data": ["500\/Internal Server Error", 41, 100.0, 0.06307498230823667], "isController": false}]}, function(index, item){
+    createTable($("#errorsTable"), {"supportsControllersDiscrimination": false, "titles": ["Type of error", "Number of errors", "% in errors", "% in all samples"], "items": []}, function(index, item){
         switch(index){
             case 2:
             case 3:
@@ -226,7 +226,7 @@ $(document).ready(function() {
     }, [[1, 1]]);
 
         // Create top5 errors by sampler
-    createTable($("#top5ErrorsBySamplerTable"), {"supportsControllersDiscrimination": false, "overall": {"data": ["Total", 65002, 41, "500\/Internal Server Error", 41, null, null, null, null, null, null, null, null], "isController": false}, "titles": ["Sample", "#Samples", "#Errors", "Error", "#Errors", "Error", "#Errors", "Error", "#Errors", "Error", "#Errors", "Error", "#Errors"], "items": [{"data": ["HP", 65000, 41, "500\/Internal Server Error", 41, null, null, null, null, null, null, null, null], "isController": false}, {"data": [], "isController": false}, {"data": [], "isController": false}, {"data": [], "isController": false}]}, function(index, item){
+    createTable($("#top5ErrorsBySamplerTable"), {"supportsControllersDiscrimination": false, "overall": {"data": ["Total", 60002, 0, null, null, null, null, null, null, null, null, null, null], "isController": false}, "titles": ["Sample", "#Samples", "#Errors", "Error", "#Errors", "Error", "#Errors", "Error", "#Errors", "Error", "#Errors", "Error", "#Errors"], "items": [{"data": [], "isController": false}, {"data": [], "isController": false}, {"data": [], "isController": false}, {"data": [], "isController": false}]}, function(index, item){
         return item;
     }, [[0, 0]], 0);
 
