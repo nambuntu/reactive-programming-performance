@@ -1,20 +1,9 @@
 # Reactive Programming
 
-If you've been following recent software development trends, you probably heard of Reactive Programming. It is really a way to bring higher performance with lower memory requirement of Java applications for building API or web services. Reactive Programming can do this by avoiding operating system blocking calls that always lead to process and context switches.
+If you come here, you probably heard of Reactive Programming as a software development trends past few years. I believe it is really a way to bring higher performance with lower memory requirement of Java applications for building API or web services. And the reason Reactive Programming can do this is by avoiding operating system blocking calls that always lead to process and context switches.
 
-In today tutorial I want to discuss and make a comparison of two Java Reactive frameworks I've been using for developing microservices and high performance platform: [Vertx]([https://vertx.io](https://vertx.io/)) and [SpringBoot](https://spring.io/projects/spring-boot)
-
-Not a formal definition but according to [wikipedia](https://en.wikipedia.org/wiki/Reactive_programming):
-
-> **Reactive programming** is a [programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) oriented around [data flows](https://en.wikipedia.org/wiki/Dataflow_programming) and the propagation of change. This means that it should be possible to express static or dynamic data flows with ease in the programming languages used, and that the underlying execution model will automatically propagate changes through the data flow
-
-If don't know Reactive programming yet, here are couple of good links get yourself familiar with:
-
-[The Reactive Manifesto](https://www.reactivemanifesto.org/)
-
-[The introduction to Reactive Programming you've been missing](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
-
-[RxJava](https://github.com/ReactiveX/RxJava)
+Despite working with these tools for some years already, I sometimes found it's difficult to fully understand the difference in performance and not the ecosystem.
+That is why in today tutorial I want to discuss and make a comparison of two Java Reactive frameworks I've been using for developing microservices and high performance platform: [Vertx]([https://vertx.io](https://vertx.io/)) and [SpringBoot](https://spring.io/projects/spring-boot)
 
 # Example structure
 
@@ -106,5 +95,27 @@ After running the test on my laptop, I found that Spring-boot actually performed
 ![Vert.x summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx_summary.jpg)
 ![Spring-boot summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot_summary.jpg)
 
+As defined in `user.properties` the for the request acceptance:
+* APDEX satisfaction threshol (in ms)
+`jmeter.reportgenerator.apdex_satisfied_threshold=100`
+* APDEX tolerance threshold (in ms)
+`jmeter.reportgenerator.apdex_tolerated_threshold=500`
+
+We see Spring-boot deliver Apdex = 0.754 which is much better than when compared to Vertx at 0.066
+
+
 
 I also created a [Symfony](https://symfony.com/) 4 microservices project to run with Apache 2 httpd server
+
+# What is Reactive Programming again?
+Not a formal definition but according to [wikipedia](https://en.wikipedia.org/wiki/Reactive_programming):
+
+> **Reactive programming** is a [programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) oriented around [data flows](https://en.wikipedia.org/wiki/Dataflow_programming) and the propagation of change. This means that it should be possible to express static or dynamic data flows with ease in the programming languages used, and that the underlying execution model will automatically propagate changes through the data flow
+
+Spring-boot and Vert.x can help us start with Reactive Programming easily to work on concrete problem, but for more general concepts I always find the following links of help:
+
+[The Reactive Manifesto](https://www.reactivemanifesto.org/)
+
+[The introduction to Reactive Programming you've been missing](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
+
+[RxJava](https://github.com/ReactiveX/RxJava)
