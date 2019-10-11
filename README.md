@@ -93,8 +93,8 @@ jmeter -q user.properties -n -t stress_test.jmx -l ./result/spring/result.csv -e
 
 # Analyse Test Results and Conclusion
 After running the test on my laptop, I found that Spring-boot actually performed much better than Vert.x in term of speed and stability.
-![Vert.x summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx_summary.jpg)
-![Spring-boot summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot_summary.jpg)
+![Vert.x summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-performance-summary.jpg)
+![Spring-boot summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot-performance-summary.jpg)
 
 As defined in `user.properties` the for the request acceptance:
 * APDEX satisfaction threshol (in ms)
