@@ -37,6 +37,7 @@ If you have problem running the test on Windows with a large number of threads p
 
 For more details, please consider following this link: [https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/](https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/)
 * `ThreadGroup.ramp_time` (time it should take to ramp up to 65000 threads): 120 (2 minutes)
+* `LoopController.loops` = -1 (means loop forever)
 * APDEX satisfaction threshol (in ms)
 `jmeter.reportgenerator.apdex_satisfied_threshold=100`
 * APDEX tolerance threshold (in ms)
