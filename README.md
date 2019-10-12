@@ -1,6 +1,6 @@
 # Reactive Programming
 
-If you came here, you probably heard of Reactive as a trend of software development in recent years. I believe it is remarkably a way to bring higher performance with the lower memory requirement of Java applications for building API or web services. And the reason Reactive Programming can do this is by avoiding operating system blocking calls that always lead to process and context switches.
+If you came here, you probably heard of Reactive as a trend of software development in recent years. I believe it is remarkably a way to bring higher performance with the lower memory requirement of Java applications for building API or web services. [Read more](#what-is-reactive-programming-again)
 
 Despite working with these tools for some years already, I sometimes found it's difficult to fully understand the difference in performance and not the ecosystem.
 That is why in today tutorial I want to discuss and make a comparison of two Java Reactive frameworks I've been using for developing microservices and high-performance platform: [Vertx](https://vertx.io) and [SpringBoot](https://spring.io/projects/spring-boot)
@@ -95,16 +95,16 @@ After running the test on my laptop, I found that both Spring-boot and Vert.x ca
 * Vert.x performance summary
 ![Vert.x summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-performance-summary.jpg)
 
-
 * However, the result surprisingly shows that Spring-boot performed much better than Vert.x in term of speed and stability. As defined in `user.properties` the for the request acceptance:
 `jmeter.reportgenerator.apdex_satisfied_threshold=100`
 `jmeter.reportgenerator.apdex_tolerated_threshold=500`
-
 Spring-boot simply out-performed Vert.x both in Apdex term (0.754 vs 0.066) and throughput (1429 vs 776 transactions/sec).
 
-I also created a [Symfony](https://symfony.com/) 4 microservices project to run with Apache 2 httpd server, but the test result failed so it can't be comparable.
+* If for large project structure and performance, I would pick Spring-boot to build microservices for its performance and huge libraries support from the community.
+But as for single or small microservices system, Vert.x would be an elegant and faster way considering how easy it is to create and deploy verticle.
 
-* Detailed comparison
+* Comparison
+
 For more details, please have a look at the charts below or view the JMeter result:
 
 Toolkit | Result | Detail link
@@ -142,7 +142,9 @@ Not a formal definition but according to [wikipedia](https://en.wikipedia.org/wi
 
 > **Reactive programming** is a [programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) oriented around [data flows](https://en.wikipedia.org/wiki/Dataflow_programming) and the propagation of change. This means that it should be possible to express static or dynamic data flows with ease in the programming languages used and that the underlying execution model will automatically propagate changes through the data flow
 
-Spring-boot and Vert.x can help us start with Reactive Programming easily to work on a concrete problem, but for more general concepts I always find the following links helpful:
+The reason Reactive Programming can do this is by avoiding operating system blocking calls that always lead to process and context switches.
+Furthermore, both spring-boot and Vert.x can help us start with Reactive Programming easily to work on a concrete problem.
+For more general concepts I always find the following links helpful:
 
 [The Reactive Manifesto](https://www.reactivemanifesto.org/)
 
@@ -161,7 +163,10 @@ If you have problem running the test on Windows with a large number of threads p
   - Default: 0x1388 (5000 decimal)
 
 For more details, please consider following this link: [https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/](https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/)
+2. Compare with Symfony or Laravel
 
-2. Configure virtual host for Symfony
+I also created a [Symfony](https://symfony.com/) 4 microservices project to run with Apache 2 httpd server, but the test result can't be comparable so I just leave it out and may come back in a more fair-minded comparison in the future.
+
+3. Configure virtual host for Symfony
 During this kind of test, please avoid Symfony built-in web server and instead configure a proper web-server
 [https://symfony.com/doc/current/setup/web_server_configuration.html](https://symfony.com/doc/current/setup/web_server_configuration.html)
