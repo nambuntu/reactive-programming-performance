@@ -1,29 +1,29 @@
 # Reactive Programming
 
-If you come here, you probably heard of Reactive Programming as a software development trends past few years. I believe it is really a way to bring higher performance with lower memory requirement of Java applications for building API or web services. And the reason Reactive Programming can do this is by avoiding operating system blocking calls that always lead to process and context switches.
+If you came here, you probably heard of Reactive as a trend of software development in recent years. I believe it is remarkably a way to bring higher performance with the lower memory requirement of Java applications for building API or web services. And the reason Reactive Programming can do this is by avoiding operating system blocking calls that always lead to process and context switches.
 
 Despite working with these tools for some years already, I sometimes found it's difficult to fully understand the difference in performance and not the ecosystem.
-That is why in today tutorial I want to discuss and make a comparison of two Java Reactive frameworks I've been using for developing microservices and high performance platform: [Vertx]([https://vertx.io](https://vertx.io/)) and [SpringBoot](https://spring.io/projects/spring-boot)
+That is why in today tutorial I want to discuss and make a comparison of two Java Reactive frameworks I've been using for developing microservices and high-performance platform: [Vertx](https://vertx.io) and [SpringBoot](https://spring.io/projects/spring-boot)
 
 # Example structure
 
 For this performance testing I created two identical REST API for managing a book store including the following operations:
 
-* Clean up the data store
+* Clean up the datastore
 * Add a new book
 * Get all book items
 
 The tech-stack includes:
 
 * Vertx Web or SpringBoot for backend
-* MongoDB (instance created using Docker) for data layer.
+* MongoDB (instance created using Docker) for the data layer.
 
 # Performance Test design
-In order to test the performance of the above two projects, I used [jMeter](https://jmeter.apache.org/) to design and run the test as following:
+To test the performance of the above two projects, I used [jMeter](https://jmeter.apache.org/) to design and run the test as following:
 ## Computer specs
 * Computer: Dell `XPS 9560`, `core-i7-7700HQ` 4 cores 8 threads, 16GB RAM
-* Mongodb: Run inside docker
-* Java application: Run from terminal by `mvn`
+* MongoDB: Run inside docker
+* Java application: Run from the terminal by `mvn`
 
 ## jMeter test specs
 * Parameters:
@@ -51,14 +51,14 @@ Details of the test script please see [stress_test.jmx](stress_test.jmx)
 # How to run the test
 ### Step 0. Clone repo
 Please clone the current repo, have [Java](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) (at least Java 8), [jMeter](https://jmeter.apache.org/) and [Maven](https://maven.apache.org/) already installed on your system
-### Step 1. Start mongodb
-It depends on your taste to start a mongodb instance your own way, for the simplicity purpose of this tutorial I'm gonna start up one instance using docker
+### Step 1. Start MongoDB
+It depends on your taste to start a MongoDB instance your own way, for the simple purpose of this tutorial I'm gonna start up one instance using docker
 
 ```bash
 docker pull mongo
-docker run -d -p 27017-27019:27017-27019 --name mongodb mongo
+docker run -d -p 27017-27019:27017-27019 --name MongoDB mongo
 ```
-To run already created docker image
+To run already created a docker image
 ```bash
 docker run -p 27017-27019:27017-27019 mongo
 ```
@@ -96,16 +96,16 @@ After running the test on my laptop, I found that both Spring-boot and Vert.x ca
 ![Vert.x summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-performance-summary.jpg)
 
 
-* However, the result shows that Spring-boot actually performed much better than Vert.x in term of speed and stability. As defined in `user.properties` the for the request acceptance:
+* However, the result surprisingly shows that Spring-boot performed much better than Vert.x in term of speed and stability. As defined in `user.properties` the for the request acceptance:
 `jmeter.reportgenerator.apdex_satisfied_threshold=100`
 `jmeter.reportgenerator.apdex_tolerated_threshold=500`
 
 Spring-boot simply out-performed Vert.x both in Apdex term (0.754 vs 0.066) and throughput (1429 vs 776 transactions/sec).
 
-I also created a [Symfony](https://symfony.com/) 4 microservices project to run with Apache 2 httpd server, but the test result totally failed so it can't be comparable.
+I also created a [Symfony](https://symfony.com/) 4 microservices project to run with Apache 2 httpd server, but the test result failed so it can't be comparable.
 
 * Detailed comparison
-For more detais, please have a look at the charts below or view the jmeter result:
+For more details, please have a look at the charts below or view the JMeter result:
 
 Toolkit | Result | Detail link
 -|-|-
@@ -140,9 +140,9 @@ Symfony | Failed | [result/symfony/index.html](https://github.com/namnvhue/react
 # What is Reactive Programming again?
 Not a formal definition but according to [wikipedia](https://en.wikipedia.org/wiki/Reactive_programming):
 
-> **Reactive programming** is a [programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) oriented around [data flows](https://en.wikipedia.org/wiki/Dataflow_programming) and the propagation of change. This means that it should be possible to express static or dynamic data flows with ease in the programming languages used, and that the underlying execution model will automatically propagate changes through the data flow
+> **Reactive programming** is a [programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) oriented around [data flows](https://en.wikipedia.org/wiki/Dataflow_programming) and the propagation of change. This means that it should be possible to express static or dynamic data flows with ease in the programming languages used and that the underlying execution model will automatically propagate changes through the data flow
 
-Spring-boot and Vert.x can help us start with Reactive Programming easily to work on concrete problem, but for more general concepts I always find the following links of help:
+Spring-boot and Vert.x can help us start with Reactive Programming easily to work on a concrete problem, but for more general concepts I always find the following links helpful:
 
 [The Reactive Manifesto](https://www.reactivemanifesto.org/)
 
