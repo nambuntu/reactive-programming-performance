@@ -26,22 +26,17 @@ In order to test the performance of the above two projects, I used [jMeter](http
 * Java application: Run from terminal by `mvn`
 
 ## jMeter test specs
-* `ThreadGroup.num_threads` (concurrent users): 65000 (since I use a Windows machine, this is the maximum number of threads I can run).
-If you have problem running the test on Windows with a large number of threads please create the following registry entry:  
-  - Location: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters`
-  - Value Name: MaxUserPort
-  - Value Type: DWORD
-  - Value data: 65534
-  - Valid Range: 5000-65534 (decimal)
-  - Default: 0x1388 (5000 decimal)
+* Parameters:
 
-For more details, please consider following this link: [https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/](https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/)
-* `ThreadGroup.ramp_time` (time it should take to ramp up to 65000 threads): 120 (2 minutes)
-* `LoopController.loops` = -1 (means loop forever)
-* APDEX satisfaction threshol (in ms)
-`jmeter.reportgenerator.apdex_satisfied_threshold=100`
-* APDEX tolerance threshold (in ms)
-`jmeter.reportgenerator.apdex_tolerated_threshold=500`
+Since I use windows, the number of thread on a single host I can create with jMeter is limited to around 65000 (see [Some issues](#some-issues)) and yet I still need to create enough loops for each request to reach the max concurrency, I did a simple math `60000 = 2000 * 30` to decide the following parameters
+
+Param | Value | Description
+-|-|-
+`ThreadGroup.num_threads` | 2000 | 2000 concurrent users
+`ThreadGroup.ramp_time` | 20 | 20 seconds
+`LoopController.loops` | 30 | Create enough loops request to ramp up 2000 users
+`jmeter.reportgenerator.apdex_satisfied_threshold` | 500 | APDEX satisfaction threshol (in ms)
+`jmeter.reportgenerator.apdex_tolerated_threshold` | 1500 | APDEX tolerance threshold (in ms)
 
 * Test steps:
 
@@ -92,21 +87,55 @@ jmeter -q user.properties -n -t stress_test.jmx -l ./result/spring/result.csv -e
 ```
 
 # Analyse Test Results and Conclusion
-After running the test on my laptop, I found that Spring-boot actually performed much better than Vert.x in term of speed and stability.
-![Vert.x summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-performance-summary.jpg)
+After running the test on my laptop, I found that both Spring-boot and Vert.x can handle 60000 requests from 2000 concurrent users nicely in a time frame around 60 seconds.
+
+* Spring-boot performance summary
 ![Spring-boot summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot-performance-summary.jpg)
 
-As defined in `user.properties` the for the request acceptance:
-* APDEX satisfaction threshol (in ms)
+* Vert.x performance summary
+![Vert.x summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-performance-summary.jpg)
+
+
+* However, the result shows that Spring-boot actually performed much better than Vert.x in term of speed and stability. As defined in `user.properties` the for the request acceptance:
 `jmeter.reportgenerator.apdex_satisfied_threshold=100`
-* APDEX tolerance threshold (in ms)
 `jmeter.reportgenerator.apdex_tolerated_threshold=500`
 
-We see Spring-boot deliver Apdex = 0.754 which is much better than when compared to Vertx at 0.066
+Spring-boot simply out-performed Vert.x both in Apdex term (0.754 vs 0.066) and throughput (1429 vs 776 transactions/sec).
 
+I also created a [Symfony](https://symfony.com/) 4 microservices project to run with Apache 2 httpd server, but the test result totally failed so it can't be comparable.
 
+* Detailed comparison
+For more detais, please have a look at the charts below or view the jmeter result:
 
-I also created a [Symfony](https://symfony.com/) 4 microservices project to run with Apache 2 httpd server
+Toolkit | Result | Detail link
+-|-|-
+Spring-boot | Very good | [result/spring/index.html](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/spring/index.html)
+Vert.x | Acceptable | [result/vertx/index.html](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/vertx/index.html)
+Symfony | Failed | [result/symfony/index.html](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/symfony/index.html)
+
+* Spring-boot performance over time
+
+![Spring-boot over-time metrics](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot-over-time-metrics.png)
+
+* Vert.x performance over time
+
+![Vert.x over-time metrics](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-over-time-metrics.png)
+
+* Spring-boot throughput
+
+![Spring-boot throughput](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot-over-through-put.png)
+
+* Vert.x throughput
+
+![Vert.x throughput](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-through-put.png)
+
+* Spring-boot response time
+
+![Spring-boot over-time metrics](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot-reponse-time.png)
+
+* Vert.x response time
+
+![Vert.x over-time metrics](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-reponse-time.png)
 
 # What is Reactive Programming again?
 Not a formal definition but according to [wikipedia](https://en.wikipedia.org/wiki/Reactive_programming):
@@ -120,3 +149,19 @@ Spring-boot and Vert.x can help us start with Reactive Programming easily to wor
 [The introduction to Reactive Programming you've been missing](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
 
 [RxJava](https://github.com/ReactiveX/RxJava)
+
+# Some issues
+1. "java.net.BindException: Address already in use: connect" jMeter issue on Windows
+If you have problem running the test on Windows with a large number of threads please create the following registry entry:  
+  - Location: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters`
+  - Value Name: MaxUserPort
+  - Value Type: DWORD
+  - Value data: 65534
+  - Valid Range: 5000-65534 (decimal)
+  - Default: 0x1388 (5000 decimal)
+
+For more details, please consider following this link: [https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/](https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/)
+
+2. Configure virtual host for Symfony
+During this kind of test, please avoid Symfony built-in web server and instead configure a proper web-server
+[https://symfony.com/doc/current/setup/web_server_configuration.html](https://symfony.com/doc/current/setup/web_server_configuration.html)
