@@ -34,7 +34,7 @@ Param | Value | Description
 -|-|-
 `ThreadGroup.num_threads` | 2000 | 2000 concurrent users
 `ThreadGroup.ramp_time` | 20 | 20 seconds
-`LoopController.loops` | 30 | Create enough loops request to ramp up 2000 users
+`LoopController.loops` | 30 | Create 30 loops so that it's enough to ramp up 2000 users
 `jmeter.reportgenerator.apdex_satisfied_threshold` | 500 | APDEX satisfaction threshol (in ms)
 `jmeter.reportgenerator.apdex_tolerated_threshold` | 1500 | APDEX tolerance threshold (in ms)
 
@@ -44,7 +44,7 @@ Param | Value | Description
   -|-|-|-
   1 | /cleanup/ | GET | 1
   2 | /books/ | POST | 1
-  3 | /books/ | GET | 65,000
+  3 | /books/ | GET | 60,000
 
 Details of the test script please see [stress_test.jmx](stress_test.jmx)
 
