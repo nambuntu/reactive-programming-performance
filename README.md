@@ -90,10 +90,10 @@ jmeter -q user.properties -n -t stress_test.jmx -l ./result/spring/result.csv -e
 After running the test on my laptop, I found that both Spring-boot and Vert.x can handle 60000 requests from 2000 concurrent users nicely in a time frame around 60 seconds.
 
 * Spring-boot performance summary
-![Spring-boot summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot-performance-summary.jpg)
+![Spring-boot summary](https://namnvhue.github.io/reactive-programming-performance/result/images/springboot-performance-summary.jpg)
 
 * Vert.x performance summary
-![Vert.x summary](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-performance-summary.jpg)
+![Vert.x summary](https://namnvhue.github.io/reactive-programming-performance/result/images/vertx-performance-summary.jpg)
 
 * However, the result surprisingly shows that Spring-boot performed much better than Vert.x in term of speed and stability. As defined in `user.properties` the for the request acceptance:
 `jmeter.reportgenerator.apdex_satisfied_threshold=100`
@@ -109,33 +109,33 @@ For more details, please have a look at the charts below or view the JMeter resu
 
 Toolkit | Result | Detail link
 -|-|-
-Spring-boot | Very good | [result/spring/index.html](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/spring/index.html)
-Vert.x | Acceptable | [result/vertx/index.html](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/vertx/index.html)
-Symfony | Failed | [result/symfony/index.html](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/symfony/index.html)
+Spring-boot | Very good | [result/spring/index.html](https://namnvhue.github.io/reactive-programming-performance/result/spring/index.html)
+Vert.x | Acceptable | [result/vertx/index.html](https://namnvhue.github.io/reactive-programming-performance/result/vertx/index.html)
+Symfony | Failed | [result/symfony/index.html](https://namnvhue.github.io/reactive-programming-performance/result/symfony/index.html)
 
 * Spring-boot performance over time
 
-![Spring-boot over-time metrics](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot-over-time-metrics.png)
+![Spring-boot over-time metrics](https://namnvhue.github.io/reactive-programming-performance/result/images/springboot-over-time-metrics.png)
 
 * Vert.x performance over time
 
-![Vert.x over-time metrics](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-over-time-metrics.png)
+![Vert.x over-time metrics](https://namnvhue.github.io/reactive-programming-performance/result/images/vertx-over-time-metrics.png)
 
 * Spring-boot throughput
 
-![Spring-boot throughput](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot-over-through-put.png)
+![Spring-boot throughput](https://namnvhue.github.io/reactive-programming-performance/result/images/springboot-over-through-put.png)
 
 * Vert.x throughput
 
-![Vert.x throughput](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-through-put.png)
+![Vert.x throughput](https://namnvhue.github.io/reactive-programming-performance/result/images/vertx-through-put.png)
 
 * Spring-boot response time
 
-![Spring-boot over-time metrics](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/springboot-reponse-time.png)
+![Spring-boot over-time metrics](https://namnvhue.github.io/reactive-programming-performance/result/images/springboot-reponse-time.png)
 
 * Vert.x response time
 
-![Vert.x over-time metrics](https://github.com/namnvhue/reactive-programming-performance/blob/master/result/images/vertx-reponse-time.png)
+![Vert.x over-time metrics](https://namnvhue.github.io/reactive-programming-performance/result/images/vertx-reponse-time.png)
 
 # What is Reactive Programming again?
 Not a formal definition but according to [wikipedia](https://en.wikipedia.org/wiki/Reactive_programming):
