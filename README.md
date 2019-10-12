@@ -162,11 +162,13 @@ If you have problem running the test on Windows with a large number of threads p
   - Valid Range: 5000-65534 (decimal)
   - Default: 0x1388 (5000 decimal)
 
-For more details, please consider following this link: [https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/](https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/)
+  For more details, please consider following this link: [https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/](https://www.baselogic.com/2011/11/23/solved-java-net-bindexception-address-use-connect-issue-windows/)
+
 2. Compare with Symfony or Laravel
 
-I also created a [Symfony](https://symfony.com/) 4 microservices project to run with Apache 2 httpd server, but the test result can't be comparable so I just leave it out and may come back in a more fair-minded comparison in the future.
+  I also created a [Symfony](https://symfony.com/) 4 microservices project to run with Apache 2 httpd server, but the test result can't be comparable so I just leave it out and may come back in a more fair-minded comparison in the future.
 
 3. Configure virtual host for Symfony
-During this kind of test, please avoid Symfony built-in web server and instead configure a proper web-server
-[https://symfony.com/doc/current/setup/web_server_configuration.html](https://symfony.com/doc/current/setup/web_server_configuration.html)
+
+  During this kind of test, please avoid Symfony built-in web server and instead configure a proper web-server
+  [https://symfony.com/doc/current/setup/web_server_configuration.html](https://symfony.com/doc/current/setup/web_server_configuration.html)
