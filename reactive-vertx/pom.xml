@@ -9,7 +9,7 @@
     <url>http://maven.apache.org</url>
     <properties>
         <java.version>1.8</java.version>
-        <vertx.version>3.8.1</vertx.version>
+        <vertx.version>3.9.4</vertx.version>
         <junit-jupiter.version>5.5.0</junit-jupiter.version>
         <exec.mainClass>work.inlumina.reactive.performance.VertxMain</exec.mainClass>
     </properties>
